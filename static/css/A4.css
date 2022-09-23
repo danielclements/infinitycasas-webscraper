@@ -2,6 +2,12 @@
     --bleeding: 0.5cm;
     --margin: 1cm;
   }
+
+  * {
+    -webkit-print-color-adjust: exact !important;   /* Chrome, Safari 6 – 15.3, Edge */
+    color-adjust: exact !important;                 /* Firefox 48 – 96 */
+    print-color-adjust: exact !important;           /* Firefox 97+, Safari 15.4+ */
+}
   
   @page {
     size: A4;
@@ -26,7 +32,7 @@
     width: 210mm;
     font-size: 12pt;
     margin: 2em auto;
-    padding: calc(var(--bleeding) + var(--margin));
+    /* padding: calc(var(--bleeding) + var(--margin)); */
     box-shadow: 0 0 0.5cm rgba(0, 0, 0, 0.5);
     background: white;
   }
@@ -52,3 +58,107 @@
       overflow: hidden;
     }
   }
+.m-0{
+    margin: 0;
+}
+
+.p-0{
+    padding:0
+}
+
+
+.contact-list{
+    list-style: none;
+    padding: 0 0 0 15px;
+}
+.listing-item-icon{
+    background-color: #ce0000;
+    color: white;
+    padding: 4px;
+    border-radius: 2px;
+    font-size: 20px;
+    margin-bottom: 6px;
+}
+
+.section-topper{
+  
+  top: 0;
+  right: 0;
+  margin: 30px;
+  margin-bottom: 22px !important;
+}
+
+.tp-logo{
+  position: absolute ;
+  max-height: 80;
+  max-width: 160.29px;
+  top: 15px;
+  right: 30px;
+}
+
+.links{
+  font-weight: bold;
+  font-family: 'Roboto', sans-serif;
+  font-size: 20px;
+  padding-left: 10px;
+}
+
+.hr-wrapper{
+  display: flex;
+  justify-content: center;
+}
+
+.block-divider {
+  width: 710px;
+  height: 3px;
+  border: 0;
+  background-color: #cd0000;
+ }
+
+ .property-header{
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 1.3em;
+
+ }
+
+ .starts-wrapper{
+  display: flex;
+  justify-content: center;
+ }
+ .stats{
+  position: relative;
+  background-color: #2d2d2d;
+  border: 1px solid #222020;
+  height: 120px;
+  width: 710px;
+ }
+
+ .font-fam{
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.3em;
+
+ }
+
+ .bed-1{
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin-top: 0px;
+  padding-top: 15px;
+  padding-left: 15px;
+ }
+
+ .bath-1{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  margin: 0px;
+  padding-bottom: 15px;
+  padding-left: 15px;
+ }
+ .text-white{
+  color: #ffffff;
+ }

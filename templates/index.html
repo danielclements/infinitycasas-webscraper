@@ -7,14 +7,41 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>A4 Paper</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/A4.css')}}">
+  <script src="https://kit.fontawesome.com/693295fe36.js" crossorigin="anonymous"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 
 <body style="--bleeding: 0.5cm;--margin: 1cm;">
   <div class="page">
-    <!-- Your content here -->
-    <h1>{{ property_header }}</h1>
-    <h2>test</h2>
-    <!-- End of your content -->
+    
+
+    <div class="section-topper">
+        <ul class="m-0  contact-list">
+        <li><i class="fa-solid fa-phone listing-item-icon"></i><span class="links"> (0034)966410604 </span></li>
+        <li><i class="fa-solid fa-envelope listing-item-icon"></i><span class="links"> info@infinitycasas.com </span></li>
+        <li><i class="fa-solid fa-pager listing-item-icon"></i><span class="links"> http:/ /www.infinitycasas.com </span></li>
+        </ul>
+        <img class="tp-logo" src="{{ url_for('static', filename='images/infinitycasas-logo-with-text.png')}}" alt="infinitycasaslogo">
+    </div>
+     
+    <div class="hr-wrapper">
+      <div class="hr-d block-divider"></div>
+    </div>
+
+    <h2 class="property-header" style="margin-bottom: 5px !important;">{{ property_header }}</h2>
+    <h2 class="property-header" style="margin-top: 5px !important;">{{ price }}</h2>
+
+    <div class="starts-wrapper">
+      <div class="stats">
+        <p class="font-fam bed-1 text-white"><i class="fa-solid fa-bed"></i> Bedrooms:  {{ beds }}</p>
+        <p class="font-fam bath-1 text-white"><i class="fa-solid fa-bath"></i> Bathrooms:  {{ baths }}</p>
+
+      </div>
+    </div>
+
+
   </div>
 </body>
 

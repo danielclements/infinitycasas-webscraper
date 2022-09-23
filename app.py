@@ -51,14 +51,19 @@ beds = soup.find('ul', class_='features').find_all('li')[0].find('div').text[0]
 baths = soup.find('ul', class_='features').find_all('li')[1].find('div').text[0]
 
 
+# Get property price
 
+price = soup.find('div', class_='listPrice').find(text=True, recursive=False)
 
 
 @app.route('/')
 def intial_load():
     
     
-    return render_template('index.html', property_header=property_header)
+    return render_template('index.html', property_header=property_header, price=price, beds=beds, baths=baths)
+
+print(baths)
 
 
-
+if __name__ == "__main__":
+    app.run(debug=True)
