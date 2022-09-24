@@ -127,12 +127,13 @@
  .starts-wrapper{
   display: flex;
   justify-content: center;
+  margin-bottom: 15px;
  }
  .stats{
   position: relative;
   background-color: #2d2d2d;
   border: 1px solid #222020;
-  height: 120px;
+  height: 100px;
   width: 710px;
  }
 
@@ -148,7 +149,7 @@
   left: 0;
   margin-top: 0px;
   padding-top: 15px;
-  padding-left: 15px;
+  padding-left: 30px;
  }
 
  .bath-1{
@@ -157,8 +158,68 @@
   left: 0;
   margin: 0px;
   padding-bottom: 15px;
-  padding-left: 15px;
+  padding-left: 30px;
+ }
+
+ .pool-1{
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0px;
+  padding-top: 15px;
+  padding-right: 30px;
+ }
+
+ .ref-1{
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin: 0px;
+  padding-bottom: 15px;
+  padding-right: 89px;
  }
  .text-white{
   color: #ffffff;
+ }
+
+
+ .image-wrapper{
+  display: flex;
+  justify-content: center;
+ }
+
+ .top-section{
+  width: 710px;
+  height: 280px;
+  position: relative;
+ }
+
+ .main-image{
+  position: absolute;
+  top: 0;
+  left: 0;
+  max-width: 470px;
+  width: 470px !important;
+  height: 280px;
+  border: solid 1px black;
+ }
+
+ .top-row-image-r1{
+  position: absolute;
+  top: 0;
+  right: 0;
+  max-width: 220px;
+  width: 220px !important;
+  max-height: 130px;
+  border: solid 1px black;
+ }
+
+ .top-row-image-r2{
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  max-width: 220px;
+  width: 220px !important;
+  max-height: 130px;
+  border: solid 1px black;
  }

@@ -35,13 +35,20 @@
 
     <div class="starts-wrapper">
       <div class="stats">
-        <p class="font-fam bed-1 text-white"><i class="fa-solid fa-bed"></i> Bedrooms:  {{ beds }}</p>
-        <p class="font-fam bath-1 text-white"><i class="fa-solid fa-bath"></i> Bathrooms:  {{ baths }}</p>
-
+        <p class="font-fam bed-1 text-white"><i class="fa-solid fa-bed"></i>   Bedrooms:  {{ beds }}</p>
+        <p class="font-fam bath-1 text-white"><i class="fa-solid fa-bath"></i>   Bathrooms:  {{ baths }}</p>
+        <p class="font-fam pool-1 text-white"><i class="fa-solid fa-water-ladder"></i>    {{ pool }}</p>
+        <p class="font-fam ref-1 text-white"><i class="fa-solid fa-asterisk"></i>    Ref: {{ property_ref }}</p>
       </div>
     </div>
 
-
+    <div class="image-wrapper">
+      <div class="top-section">
+        <img src="{{ mainImage }}" alt="main-property-image" class="main-image">
+        <img src="{{ image_top_row_r1 }}" alt="image top row 1" class="top-row-image-r1">
+        <img src="{{ image_top_row_r2 }}" alt="image top row 2" class="top-row-image-r2">
+      </div>
+    </div>
   </div>
 </body>
 
