@@ -22,6 +22,9 @@ for link in all_property_images:
 mainImage = links_array[0]
 image_top_row_r1 = links_array[30]
 image_top_row_r2 = links_array[5]
+image_bottom_row_r1 = links_array[17]
+image_bottom_row_r2 = links_array[9]
+image_bottom_row_r3 = links_array[7]
 
 
 # get property Header
@@ -72,7 +75,10 @@ def intial_load():
     return render_template(
         'index.html', property_header=property_header, price=price, beds=beds,
          baths=baths, pool=pool, property_ref=property_ref, mainImage=mainImage,
-         image_top_row_r1=image_top_row_r1, image_top_row_r2=image_top_row_r2)
+         image_top_row_r1=image_top_row_r1, image_top_row_r2=image_top_row_r2,
+         image_bottom_row_r1=image_bottom_row_r1,
+         image_bottom_row_r2=image_bottom_row_r2,
+         image_bottom_row_r3=image_bottom_row_r3)
 
 
 if __name__ == "__main__":

@@ -186,12 +186,16 @@
  .image-wrapper{
   display: flex;
   justify-content: center;
+  align-items: center;
+  flex-direction: column;
  }
 
  .top-section{
   width: 710px;
   height: 280px;
   position: relative;
+  margin-bottom: 20px;
+  
  }
 
  .main-image{
@@ -217,6 +221,42 @@
  .top-row-image-r2{
   position: absolute;
   bottom: 0;
+  right: 0;
+  max-width: 220px;
+  width: 220px !important;
+  max-height: 130px;
+  border: solid 1px black;
+ }
+
+ .bottom-section{
+  width: 710px;
+  height: 130px;
+  position: relative;
+ }
+
+ .bottom-row-image-r1{
+  position: absolute;
+  top: 0;
+  left: 0;
+  max-width: 220px;
+  width: 220px !important;
+  max-height: 130px;
+  border: solid 1px black;
+ }
+
+ .bottom-row-image-r2{
+  position: absolute;
+  top: 0;
+  left: 249px;
+  max-width: 220px;
+  width: 220px !important;
+  max-height: 130px;
+  border: solid 1px black;
+ }
+
+ .bottom-row-image-r3{
+  position: absolute;
+  top: 0;
   right: 0;
   max-width: 220px;
   width: 220px !important;
