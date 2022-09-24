@@ -263,3 +263,27 @@
   max-height: 130px;
   border: solid 1px black;
  }
+
+ .description{
+  margin-top: 20px;
+  margin-left: 61px;
+  height: 275px;
+  max-height: 275px;
+ }
+
+ .property-desc-ul{
+  padding: 0;
+ }
+
+ .property-desc-li{
+  font-family: 'Roboto', sans-serif;
+  font-size: 24px;
+ }
+
+ .bottom-logo-img{
+  position: absolute ;
+  max-height: 60px;
+  opacity: 70%;
+  bottom: -18px;
+  left: 30px;
+ }

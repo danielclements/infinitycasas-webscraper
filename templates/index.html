@@ -55,6 +55,17 @@
       </div>
     </div>
 
+    <div class="description">
+      <ul class="property-desc-ul">
+        {% for item in property_array %}
+          <li class='property-desc-li'> {{ item }} </li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div class="bottom-logo">
+      <img class="bottom-logo-img" src="{{ url_for('static', filename='images/infinitycasas-logo-with-text.png')}}" alt="infinitycasas-logo-bottom">
+    </div>
 
   </div>
 </body>

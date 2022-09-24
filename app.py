@@ -9,7 +9,7 @@ app = Flask(__name__)
 headers = {
     'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:55.0) Gecko/20100101 Firefox/55.0',
     }
-html_text = requests.get('https://infinitycasas.com/properties/3-bedroom-townhouse-in-cabo-roig/', headers=headers).text
+html_text = requests.get('https://infinitycasas.com/properties/semi-detached-villa-in-cabo-roig/', headers=headers).text
 soup = BeautifulSoup(html_text, 'lxml')
 
 # gets all images in the image gallery
@@ -20,7 +20,7 @@ for link in all_property_images:
     links_array.append(source)
 
 mainImage = links_array[0]
-image_top_row_r1 = links_array[30]
+image_top_row_r1 = links_array[11]
 image_top_row_r2 = links_array[5]
 image_bottom_row_r1 = links_array[17]
 image_bottom_row_r2 = links_array[9]
@@ -40,21 +40,18 @@ property_ref = soup.find('div', class_='additional').find_all('div', class_='amI
 property_features=soup.find('div', class_='amenities').find_all('div', class_='amItem')
 feature_array = []
 pool = "Communal Pool"
-for feature in property_features:
-    feature_array.append(feature.text)
-    if feature.text == "Private Pool":
-        pool.replace("Communal Pool", "Private Pool")
 
 
 # get property_description
 
-property_description = soup.find('div', class_='description').find_all('p')
-combined_description = []
-for  paragraph in property_description:
-    combined_description.append(paragraph.text)
-property_desc_additional = ''
-if not combined_description:
-    property_desc_additional = soup.find('section', id='FullDesc').text
+property_description = soup.find('div', class_='entry-content').find('ul').find_all('li')
+property_array = []
+
+for item in property_description:
+    property_array.append(item.text)
+
+
+
 
 
 # get bedrooms oand bathrooms
@@ -78,8 +75,12 @@ def intial_load():
          image_top_row_r1=image_top_row_r1, image_top_row_r2=image_top_row_r2,
          image_bottom_row_r1=image_bottom_row_r1,
          image_bottom_row_r2=image_bottom_row_r2,
-         image_bottom_row_r3=image_bottom_row_r3)
+         image_bottom_row_r3=image_bottom_row_r3, property_array=property_array[0:9])
 
 
 if __name__ == "__main__":
     app.run(debug=True)
+
+
+
+
