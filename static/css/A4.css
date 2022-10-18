@@ -287,3 +287,26 @@
   bottom: -18px;
   left: 30px;
  }
+
+ .no-display{
+  display: none;
+ }
+
+ #image-holder{
+  position: absolute;
+  z-index: 999;
+  right: 0;
+  top:500px;
+  background-color: #222020ea;
+  padding: 15px;
+
+ }
+
+ #click-to-select-image{
+  height: 100px;
+  width: 130px;
+  max-width: 150px;
+  max-height: 150px;
+  margin: 3px;
+
+ }

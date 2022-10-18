@@ -38,13 +38,13 @@
         <p class="font-fam bed-1 text-white"><i class="fa-solid fa-bed"></i>   Bedrooms:  {{ beds }}</p>
         <p class="font-fam bath-1 text-white"><i class="fa-solid fa-bath"></i>   Bathrooms:  {{ baths }}</p>
         <p class="font-fam pool-1 text-white"><i class="fa-solid fa-water-ladder"></i>    {{ pool }}</p>
-        <p class="font-fam ref-1 text-white"><i class="fa-solid fa-asterisk"></i>    Ref: {{ property_ref }}</p>
+        <p class="font-fam ref-1 text-white"></i>   Ref: {{ property_ref }}</p>
       </div>
     </div>
 
     <div class="image-wrapper">
       <div class="top-section">
-        <img src="{{ mainImage }}" alt="main-property-image" class="main-image">
+        <img src="{{ mainImage }}" alt="main-property-image" id="main-image" class="main-image" onclick="main_select_image()">
         <img src="{{ image_top_row_r1 }}" alt="image top row 1" class="top-row-image-r1">
         <img src="{{ image_top_row_r2 }}" alt="image top row 2" class="top-row-image-r2">
       </div>
@@ -67,8 +67,35 @@
       <img class="bottom-logo-img" src="{{ url_for('static', filename='images/infinitycasas-logo-with-text.png')}}" alt="infinitycasas-logo-bottom">
     </div>
 
+  
+    <div id="image-holder"class="no-display">
+      <button style='display: block;' onclick="close_image_selector()">Exit</button>
+      {% for link in links_array %}
+        <img id="click-to-select-image" src="{{ link }}" onclick="test(event)">
+      {% endfor %}
+    </div>
+
   </div>
+
+  
 </body>
+
+<script>
+  var image_link_array = { links_array };
+
+  function main_select_image() {
+    document.getElementById("image-holder").classList.remove('no-display');
+    
+  };
+
+  function test(event){
+    document.getElementById("main-image").src=event.target.src;
+  };
+
+  function close_image_selector(){
+    document.getElementById("image-holder").classList.add('no-display');
+  };
+</script>
 
 
 </html>
