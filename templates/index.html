@@ -44,14 +44,14 @@
 
     <div class="image-wrapper">
       <div class="top-section">
-        <img src="{{ mainImage }}" alt="main-property-image" id="main-image" class="main-image" onclick="main_select_image()">
-        <img src="{{ image_top_row_r1 }}" alt="image top row 1" class="top-row-image-r1">
-        <img src="{{ image_top_row_r2 }}" alt="image top row 2" class="top-row-image-r2">
+        <img src="{{ mainImage }}" alt="main-property-image" id="main-image" class="main-image" onclick="target_switch(event), image_holder_toggle()">
+        <img src="{{ image_top_row_r1 }}" alt="image top row 1" id="image-top-row-1" class="top-row-image-r1" onclick="target_switch(event), image_holder_toggle()">
+        <img src="{{ image_top_row_r2 }}" alt="image top row 2" id="image-top-row-2" class="top-row-image-r2" onclick="target_switch(event), image_holder_toggle()">
       </div>
       <div class="bottom-section">
-        <img src="{{ image_bottom_row_r1 }}" alt="image bottom row 1" class="bottom-row-image-r1">
-        <img src="{{ image_bottom_row_r2 }}" alt="image bottom row 2" class="bottom-row-image-r2">
-        <img src="{{ image_bottom_row_r3 }}" alt="image bottom row 3" class="bottom-row-image-r3">
+        <img src="{{ image_bottom_row_r1 }}" alt="image bottom row 1" id="image-bottom-row-1" class="bottom-row-image-r1" onclick="target_switch(event),image_holder_toggle()">
+        <img src="{{ image_bottom_row_r2 }}" alt="image bottom row 2" id="image-bottom-row-2" class="bottom-row-image-r2" onclick="target_switch(event),image_holder_toggle()">
+        <img src="{{ image_bottom_row_r3 }}" alt="image bottom row 3" id="image-bottom-row-3" class="bottom-row-image-r3" onclick="target_switch(event), image_holder_toggle()">
       </div>
     </div>
 
@@ -71,7 +71,7 @@
     <div id="image-holder"class="no-display">
       <button style='display: block;' onclick="close_image_selector()">Exit</button>
       {% for link in links_array %}
-        <img id="click-to-select-image" src="{{ link }}" onclick="test(event)">
+        <img id="click-to-select-image" src="{{ link }}" onclick="change_src(event), close_image_selector()">
       {% endfor %}
     </div>
 
@@ -82,14 +82,21 @@
 
 <script>
   var image_link_array = { links_array };
+  var target_img ;
 
-  function main_select_image() {
+  function image_holder_toggle() {
     document.getElementById("image-holder").classList.remove('no-display');
     
   };
 
-  function test(event){
-    document.getElementById("main-image").src=event.target.src;
+  function target_switch(event){
+    target_img = event.target.id;
+    console.log(target_img)
+    return target_img
+  };
+
+  function change_src(event){
+    document.getElementById(target_img).src=event.target.src;
   };
 
   function close_image_selector(){
