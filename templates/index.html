@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>A4 Paper</title>
+  <title>Please provide a property link</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/A4.css')}}">
   <script src="https://kit.fontawesome.com/693295fe36.js" crossorigin="anonymous"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,96 +13,13 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 
-<body style="--bleeding: 0.5cm;--margin: 1cm;">
-  <div class="page">
-    
+<body>
+    <form action="#" method="POST">
+        <p>Link:</p>
+        <p><input type="text" name="property-link"></p>
+        <p><input type="submit" name="submit"></p>
 
-    <div class="section-topper">
-        <ul class="m-0  contact-list">
-        <li><i class="fa-solid fa-phone listing-item-icon"></i><span class="links"> (0034)966410604 </span></li>
-        <li><i class="fa-solid fa-envelope listing-item-icon"></i><span class="links"> info@infinitycasas.com </span></li>
-        <li><i class="fa-solid fa-pager listing-item-icon"></i><span class="links"> http:/ /www.infinitycasas.com </span></li>
-        </ul>
-        <img class="tp-logo" src="{{ url_for('static', filename='images/infinitycasas-logo-with-text.png')}}" alt="infinitycasaslogo">
-    </div>
-     
-    <div class="hr-wrapper">
-      <div class="hr-d block-divider"></div>
-    </div>
-
-    <h2 class="property-header" style="margin-bottom: 5px !important;">{{ property_header }}</h2>
-    <h2 class="property-header" style="margin-top: 5px !important;">{{ price }}</h2>
-
-    <div class="starts-wrapper">
-      <div class="stats">
-        <p class="font-fam bed-1 text-white"><i class="fa-solid fa-bed"></i>   Bedrooms:  {{ beds }}</p>
-        <p class="font-fam bath-1 text-white"><i class="fa-solid fa-bath"></i>   Bathrooms:  {{ baths }}</p>
-        <p class="font-fam pool-1 text-white"><i class="fa-solid fa-water-ladder"></i>    {{ pool }}</p>
-        <p class="font-fam ref-1 text-white"></i>   Ref: {{ property_ref }}</p>
-      </div>
-    </div>
-
-    <div class="image-wrapper">
-      <div class="top-section">
-        <img src="{{ mainImage }}" alt="main-property-image" id="main-image" class="main-image" onclick="target_switch(event), image_holder_toggle()">
-        <img src="{{ image_top_row_r1 }}" alt="image top row 1" id="image-top-row-1" class="top-row-image-r1" onclick="target_switch(event), image_holder_toggle()">
-        <img src="{{ image_top_row_r2 }}" alt="image top row 2" id="image-top-row-2" class="top-row-image-r2" onclick="target_switch(event), image_holder_toggle()">
-      </div>
-      <div class="bottom-section">
-        <img src="{{ image_bottom_row_r1 }}" alt="image bottom row 1" id="image-bottom-row-1" class="bottom-row-image-r1" onclick="target_switch(event),image_holder_toggle()">
-        <img src="{{ image_bottom_row_r2 }}" alt="image bottom row 2" id="image-bottom-row-2" class="bottom-row-image-r2" onclick="target_switch(event),image_holder_toggle()">
-        <img src="{{ image_bottom_row_r3 }}" alt="image bottom row 3" id="image-bottom-row-3" class="bottom-row-image-r3" onclick="target_switch(event), image_holder_toggle()">
-      </div>
-    </div>
-
-    <div class="description">
-      <ul class="property-desc-ul">
-        {% for item in property_array %}
-          <li class='property-desc-li'> {{ item }} </li>
-        {% endfor %}
-      </ul>
-    </div>
-
-    <div class="bottom-logo">
-      <img class="bottom-logo-img" src="{{ url_for('static', filename='images/infinitycasas-logo-with-text.png')}}" alt="infinitycasas-logo-bottom">
-    </div>
-
-  
-    <div id="image-holder"class="no-display">
-      <button style='display: block;' onclick="close_image_selector()">Exit</button>
-      {% for link in links_array %}
-        <img id="click-to-select-image" src="{{ link }}" onclick="change_src(event), close_image_selector()">
-      {% endfor %}
-    </div>
-
-  </div>
-
-  
+    </form>
 </body>
-
-<script>
-  var image_link_array = { links_array };
-  var target_img ;
-
-  function image_holder_toggle() {
-    document.getElementById("image-holder").classList.remove('no-display');
-    
-  };
-
-  function target_switch(event){
-    target_img = event.target.id;
-    console.log(target_img)
-    return target_img
-  };
-
-  function change_src(event){
-    document.getElementById(target_img).src=event.target.src;
-  };
-
-  function close_image_selector(){
-    document.getElementById("image-holder").classList.add('no-display');
-  };
-</script>
-
 
 </html>
