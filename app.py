@@ -45,8 +45,10 @@ def index():
         property_features=soup.find('div', class_='amenities').find_all('div', class_='amItem')
         feature_array = []
         pool = "Communal Pool"
+        for feature in property_features:
+            feature_array.append(feature.text)
 
-
+        print(feature_array)
         # get property_description
 
         # property_description = soup.find('div', class_='entry-content').find('ul').find_all('li')
@@ -78,7 +80,7 @@ def index():
             image_bottom_row_r1=image_bottom_row_r1,
             image_bottom_row_r2=image_bottom_row_r2,
             image_bottom_row_r3=image_bottom_row_r3, property_array=property_array[0:9],
-            links_array=links_array)
+            links_array=links_array, feature_array=feature_array[0:9])
     else:
         return render_template(
         'index.html')
