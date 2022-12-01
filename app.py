@@ -48,7 +48,6 @@ def index():
         for feature in property_features:
             feature_array.append(feature.text)
 
-        print(feature_array)
         # get property_description
 
         # property_description = soup.find('div', class_='entry-content').find('ul').find_all('li')
@@ -62,7 +61,7 @@ def index():
 
 
 
-        # get bedrooms oand bathrooms
+        # get bedrooms and bathrooms
 
         beds = soup.find('ul', class_='features').find_all('li')[0].find('div').text[0]
         baths = soup.find('ul', class_='features').find_all('li')[1].find('div').text[0]

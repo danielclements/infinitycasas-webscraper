@@ -37,7 +37,7 @@
       <div class="stats">
         <p class="font-fam bed-1 text-white"><i class="fa-solid fa-bed"></i>   Bedrooms:  {{ beds }}</p>
         <p class="font-fam bath-1 text-white"><i class="fa-solid fa-bath"></i>   Bathrooms:  {{ baths }}</p>
-        <p class="font-fam pool-1 text-white"><i class="fa-solid fa-water-ladder"></i>    {{ pool }}</p>
+        <p class="font-fam pool-1 text-white" id="pool_padding" ><i class="fa-solid fa-water-ladder"></i>  <span id="pool_selector" onclick="pool_switch()">{{ pool }}</span></p>
         <p class="font-fam ref-1 text-white"></i>   Ref: {{ property_ref }}</p>
       </div>
     </div>
@@ -101,6 +101,11 @@
 
   function close_image_selector(){
     document.getElementById("image-holder").classList.add('no-display');
+  };
+
+  function pool_switch(){
+    document.getElementById("pool_selector").innerHTML = 'Private Pool';
+    document.getElementById("pool_padding").style = 'padding-right: 50px;';
   };
 </script>
 
