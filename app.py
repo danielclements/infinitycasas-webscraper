@@ -38,7 +38,10 @@ def index():
 
         # get property Ref
 
-        property_ref = soup.find('div', class_='additional').find_all('div', class_='amItem')[-1].text.split()
+        get_property_ref = soup.find('div', class_='additional').find_all('div', class_='amItem')
+        property_ref = []
+        for ref in get_property_ref:
+            property_ref.append(ref.text.split()[-1])
         
 
         # get property Features
