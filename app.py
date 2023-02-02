@@ -38,7 +38,8 @@ def index():
 
         # get property Ref
 
-        property_ref = soup.find('div', class_='additional').find_all('div', class_='amItem')[-1].text.split()[-1]
+        property_ref = soup.find('div', class_='additional').find_all('div', class_='amItem')[-1].text.split()
+        
 
         # get property Features
 
@@ -87,4 +88,3 @@ def index():
 
 if __name__ == "__main__":
     app.run(debug=True)
-

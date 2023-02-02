@@ -292,15 +292,7 @@
   display: none;
  }
 
- #image-holder{
-  position: absolute;
-  z-index: 999;
-  right: 0;
-  top:500px;
-  background-color: #222020ea;
-  padding: 15px;
 
- }
 
  #click-to-select-image{
   height: 130px;
@@ -308,5 +300,25 @@
   max-width: 245px;
   max-height: 120px;
   margin: 3px;
-
+  cursor: pointer;
  }
+
+ #image-holder{
+  left: 0;
+  top:500px;
+ }
+
+ #ref-holder{
+  right: 100px;
+  top:250px;
+ }
+ 
+.selector-container{
+  position: absolute;
+  z-index: 999;
+  
+  background-color: #0d0d0df4;
+  padding: 15px;
+  color: whitesmoke;
+  font-size: 25px;
+}
