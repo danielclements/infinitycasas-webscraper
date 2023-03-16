@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for
 from bs4 import BeautifulSoup
-import requests
+import requests, random
 
 app = Flask(__name__)
 
@@ -25,11 +25,11 @@ def index():
             links_array.append(source)
 
         mainImage = links_array[0]
-        image_top_row_r1 = links_array[-2]
-        image_top_row_r2 = links_array[4]
-        image_bottom_row_r1 = links_array[10]
-        image_bottom_row_r2 = links_array[9]
-        image_bottom_row_r3 = links_array[5]
+        image_top_row_r1 = links_array[random.randint(1, len(links_array))]
+        image_top_row_r2 = links_array[random.randint(1, len(links_array))]
+        image_bottom_row_r1 = links_array[random.randint(1, len(links_array))]
+        image_bottom_row_r2 = links_array[random.randint(1, len(links_array))]
+        image_bottom_row_r3 = links_array[random.randint(1, len(links_array))]
 
 
         # get property Header
