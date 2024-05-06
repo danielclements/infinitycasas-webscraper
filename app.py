@@ -17,11 +17,12 @@ def index():
         html_text = requests.get(link_main, headers=headers).text
         soup = BeautifulSoup(html_text, 'lxml')
 
+
         # gets all images in the image gallery
-        all_property_images = soup.find_all('a', class_='galleryItem')
+        all_property_images = soup.find_all('img', class_='img-fluid')
         links_array = []
         for link in all_property_images:
-            source = link.attrs['href']
+            source = link.attrs['src']
             links_array.append(source)
 
         mainImage = links_array[0]
@@ -33,12 +34,12 @@ def index():
 
 
         # get property Header
-        property_header = soup.find('h1', class_='pageTitle').text
+        property_header = soup.find('li', class_='breadcrumb-item active').text
 
 
         # get property Ref
 
-        get_property_ref = soup.find('div', class_='additional').find_all('div', class_='amItem')
+        get_property_ref = soup.find_all('li', class_='property-overview-item')
         property_ref = []
         for ref in get_property_ref:
             property_ref.append(ref.text.split()[-1])
@@ -46,7 +47,7 @@ def index():
 
         # get property Features
 
-        property_features=soup.find('div', class_='amenities').find_all('div', class_='amItem')
+        property_features=soup.find('div', class_='property-features-wrap').find('div').find('div', class_='block-content-wrap').find('ul').find_all('li')
         feature_array = []
         pool = "Communal Pool"
         for feature in property_features:
@@ -54,12 +55,11 @@ def index():
 
         # get property_description
 
-        # property_description = soup.find('div', class_='entry-content').find('ul').find_all('li')
-        property_description = soup.find('div', class_='entry-content').find_all('p')
-        property_array = []
+        # property_description = soup.find('div', class_='entry-content').find_all('p')
+        # property_array = []
 
-        for item in property_description:
-            property_array.append(item.text)
+        # for item in property_description:
+        #     property_array.append(item.text)
 
 
 
@@ -67,23 +67,24 @@ def index():
 
         # get bedrooms and bathrooms
 
-        beds = soup.find('ul', class_='features').find_all('li')[0].find('div').text[0]
-        baths = soup.find('ul', class_='features').find_all('li')[1].find('div').text[0]
+        beds = soup.find('i', class_='houzez-icon icon-hotel-double-bed-1 mr-1').next_sibling.next_sibling.text
+
+        baths = soup.find('i', class_='icon-bathroom-shower-1').next_sibling.next_sibling.text
 
 
         # Get property price
 
-        price = soup.find('div', class_='listPrice').find(text=True, recursive=False)
+        # price = soup.find('div', class_='listPrice').find(text=True, recursive=False)
 
         
         return render_template(
-            'print.html', property_header=property_header, price=price, beds=beds,
-            baths=baths, pool=pool, property_ref=property_ref, mainImage=mainImage,
+            'print.html', property_header=property_header, property_ref=property_ref, beds=beds,
+            baths=baths, feature_array=feature_array[0:9], pool=pool, mainImage=mainImage,
             image_top_row_r1=image_top_row_r1, image_top_row_r2=image_top_row_r2,
             image_bottom_row_r1=image_bottom_row_r1,
             image_bottom_row_r2=image_bottom_row_r2,
-            image_bottom_row_r3=image_bottom_row_r3, property_array=property_array[0:9],
-            links_array=links_array, feature_array=feature_array[0:9])
+            image_bottom_row_r3=image_bottom_row_r3,
+            links_array=links_array)
     else:
         return render_template(
         'index.html')
