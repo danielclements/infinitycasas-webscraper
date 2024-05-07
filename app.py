@@ -74,7 +74,7 @@ def index():
 
         # Get property price
 
-        # price = soup.find('div', class_='listPrice').find(text=True, recursive=False)
+        price = soup.find('li', class_='item-price').find(text=True, recursive=False)
 
         
         return render_template(
@@ -84,7 +84,7 @@ def index():
             image_bottom_row_r1=image_bottom_row_r1,
             image_bottom_row_r2=image_bottom_row_r2,
             image_bottom_row_r3=image_bottom_row_r3,
-            links_array=links_array)
+            links_array=links_array, price=price)
     else:
         return render_template(
         'index.html')
