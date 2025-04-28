@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block title %}Home - Infinity Casas{% endblock %}
+
+{% block content %}
+<div class="home-container">
+    <div class="welcome-section">
+        <h1>Welcome to Infinity Casas Window App</h1>
+        <p class="lead">Your gateway to managing property listings and creating beautiful brochures.</p>
+    </div>
+
+    <div class="form-section">
+        <h2>Create Property Brochure</h2>
+        <form method="POST" action="{{ url_for('main.home') }}">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <div class="form-group">
+                <label for="property-link">Property Link:</label>
+                <input type="text" id="property-link" name="property-link" class="form-control"
+                    placeholder="Enter property URL" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Generate Brochure</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+<style>
+    .home-container {
+        max-width: 800px;
+        margin: 40px auto;
+        padding: 20px;
+    }
+
+    .welcome-section {
+        text-align: center;
+        margin-bottom: 40px;
+        padding: 20px;
+        background-color: #f8f9fa;
+        border-radius: 8px;
+    }
+
+    .welcome-section h1 {
+        color: #333;
+        margin-bottom: 15px;
+    }
+
+    .welcome-section .lead {
+        color: #666;
+        font-size: 1.2em;
+    }
+
+    .form-section {
+        background-color: white;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-section h2 {
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 500;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 16px;
+    }
+
+    .btn-primary {
+        width: 100%;
+        padding: 12px;
+        font-size: 16px;
+    }
+</style>

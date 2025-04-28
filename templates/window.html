@@ -1,0 +1,160 @@
+{% extends "base.html" %}
+
+{% block title %}Properties - Infinity Casas{% endblock %}
+
+{% block content %}
+<style>
+    .brochure-container {
+        padding: 30px;
+        height: calc(100vh - 76px);
+        overflow-y: auto;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+
+    .brochure-grid {
+        display: grid;
+        grid-template-columns: repeat(10, minmax(0, 1fr));
+        grid-template-rows: repeat(3, 1fr);
+        gap: 20px;
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
+    }
+
+    .brochure-item {
+        background: #f0f0f0;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        position: relative;
+        aspect-ratio: 1;
+        min-height: 140px;
+        transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        box-sizing: border-box;
+        width: 100%;
+    }
+
+    .brochure-item:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .brochure-item.invalid-link {
+        border: 3px solid #ff0000;
+        animation: pulse 2s infinite;
+        background: #fff0f0;
+    }
+
+    @keyframes pulse {
+        0% {
+            border-color: #ff0000;
+        }
+
+        50% {
+            border-color: #ff6666;
+        }
+
+        100% {
+            border-color: #ff0000;
+        }
+    }
+
+    .brochure-number {
+        position: absolute;
+        top: 8px;
+        left: 8px;
+        background: rgba(0, 0, 0, 0.7);
+        color: white;
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 14px;
+        z-index: 1;
+    }
+
+    .property-link {
+        display: block;
+        width: 100%;
+        height: 100%;
+        text-decoration: none;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    .property-link img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 8px;
+    }
+
+    .no-image {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        color: #666;
+        font-size: 16px;
+        text-align: center;
+        padding: 20px;
+    }
+
+    .invalid-text {
+        position: absolute;
+        bottom: 12px;
+        left: 12px;
+        right: 12px;
+        color: #ff0000;
+        font-weight: bold;
+        text-align: center;
+        padding: 8px;
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 6px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+</style>
+
+<div class="brochure-container">
+    <div class="brochure-grid">
+        {% for i in range(1, 31) %}
+        <div class="brochure-item" id="property-{{ i }}">
+            <span class="brochure-number">{{ i }}</span>
+            {% for property in properties %}
+            {% if property.position == i %}
+            <a href="{{ property.link }}" target="_blank" class="property-link">
+                {% if property.main_image %}
+                <img src="{{ property.main_image }}" alt="Property {{ i }}">
+                {% else %}
+                <span class="no-image">No Image Available</span>
+                {% endif %}
+            </a>
+            {% endif %}
+            {% endfor %}
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Check links
+        fetch('/check_links')
+            .then(response => response.json())
+            .then(results => {
+                Object.entries(results).forEach(([position, isValid]) => {
+                    const item = document.getElementById(`property-${position}`);
+                    if (item && !isValid) {
+                        item.classList.add('invalid-link');
+                        const invalidText = document.createElement('div');
+                        invalidText.className = 'invalid-text';
+                        invalidText.textContent = 'Invalid Link';
+                        item.appendChild(invalidText);
+                    }
+                });
+            })
+            .catch(error => {
+                console.error('Error checking links:', error);
+            });
+    });
+</script>
+{% endblock %}

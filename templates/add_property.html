@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block title %}Add Property - Infinity Casas{% endblock %}
+
+{% block content %}
+<div class="form-container">
+    <h1>Add Property Link</h1>
+    <form method="POST">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <div class="form-group">
+            <label for="property_link">Property Link:</label>
+            <input type="text" id="property_link" name="property_link" required>
+        </div>
+        <div class="form-group">
+            <label for="position">Position (1-30):</label>
+            <input type="number" id="position" name="position" min="1" max="30" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Add Property</button>
+    </form>
+</div>
+{% endblock %}
+
+<style>
+    .form-container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+
+    .form-group input {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+    }
+</style>
