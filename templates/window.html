@@ -32,6 +32,7 @@
         transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
         box-sizing: border-box;
         width: 100%;
+        cursor: pointer;
     }
 
     .brochure-item:hover {
@@ -78,16 +79,84 @@
         text-align: center;
         padding: 20px;
     }
+
+    /* Modal Styles */
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        max-width: 500px;
+        border-radius: 8px;
+    }
+
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .close:hover {
+        color: black;
+    }
+
+    .modal-form {
+        margin-top: 20px;
+    }
+
+    .modal-form .form-group {
+        margin-bottom: 15px;
+    }
+
+    .modal-form label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+
+    .modal-form input {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+    }
+
+    .modal-form button {
+        background-color: #007bff;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .modal-form button:hover {
+        background-color: #0056b3;
+    }
 </style>
 
 <div class="brochure-container">
     <div class="brochure-grid">
         {% for i in range(1, 31) %}
-        <div class="brochure-item" id="property-{{ i }}">
+        <div class="brochure-item" id="property-{{ i }}" onclick="handleWindowClick({{ i }})">
             <span class="brochure-number">{{ i }}</span>
             {% for property in properties %}
             {% if property.position == i %}
-            <a href="{{ property.link }}" target="_blank" class="property-link">
+            <a href="{{ property.link }}" target="_blank" class="property-link" onclick="event.stopPropagation()">
                 {% if property.main_image %}
                 <img src="{{ property.main_image }}" alt="Property {{ i }}">
                 {% else %}
@@ -100,4 +169,51 @@
         {% endfor %}
     </div>
 </div>
+
+<!-- Add Property Modal -->
+<div id="addPropertyModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h2>Add Property</h2>
+        <form class="modal-form" method="POST" action="{{ url_for('properties.add_property') }}">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <div class="form-group">
+                <label for="property_link">Property Link:</label>
+                <input type="text" id="property_link" name="property_link" required>
+            </div>
+            <div class="form-group">
+                <label for="position">Position:</label>
+                <input type="number" id="position" name="position" readonly>
+            </div>
+            <button type="submit">Add Property</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    function handleWindowClick(position) {
+        // Check if the window is empty
+        const windowElement = document.getElementById(`property-${position}`);
+        const hasProperty = windowElement.querySelector('.property-link') !== null;
+
+        if (!hasProperty) {
+            // Set the position value in the form
+            document.getElementById('position').value = position;
+            // Show the modal
+            document.getElementById('addPropertyModal').style.display = 'block';
+        }
+    }
+
+    function closeModal() {
+        document.getElementById('addPropertyModal').style.display = 'none';
+    }
+
+    // Close modal when clicking outside
+    window.onclick = function (event) {
+        const modal = document.getElementById('addPropertyModal');
+        if (event.target == modal) {
+            modal.style.display = 'none';
+        }
+    }
+</script>
 {% endblock %}
