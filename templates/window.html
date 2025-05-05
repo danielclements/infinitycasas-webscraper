@@ -39,26 +39,6 @@
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
 
-    .brochure-item.invalid-link {
-        border: 3px solid #ff0000;
-        animation: pulse 2s infinite;
-        background: #fff0f0;
-    }
-
-    @keyframes pulse {
-        0% {
-            border-color: #ff0000;
-        }
-
-        50% {
-            border-color: #ff6666;
-        }
-
-        100% {
-            border-color: #ff0000;
-        }
-    }
-
     .brochure-number {
         position: absolute;
         top: 8px;
@@ -98,20 +78,6 @@
         text-align: center;
         padding: 20px;
     }
-
-    .invalid-text {
-        position: absolute;
-        bottom: 12px;
-        left: 12px;
-        right: 12px;
-        color: #ff0000;
-        font-weight: bold;
-        text-align: center;
-        padding: 8px;
-        background: rgba(255, 255, 255, 0.95);
-        border-radius: 6px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
 </style>
 
 <div class="brochure-container">
@@ -134,27 +100,4 @@
         {% endfor %}
     </div>
 </div>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        // Check links
-        fetch('/check_links')
-            .then(response => response.json())
-            .then(results => {
-                Object.entries(results).forEach(([position, isValid]) => {
-                    const item = document.getElementById(`property-${position}`);
-                    if (item && !isValid) {
-                        item.classList.add('invalid-link');
-                        const invalidText = document.createElement('div');
-                        invalidText.className = 'invalid-text';
-                        invalidText.textContent = 'Invalid Link';
-                        item.appendChild(invalidText);
-                    }
-                });
-            })
-            .catch(error => {
-                console.error('Error checking links:', error);
-            });
-    });
-</script>
 {% endblock %}

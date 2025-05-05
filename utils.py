@@ -15,30 +15,6 @@ def sanitize_url(url):
     # Remove any potentially dangerous characters
     return re.sub(r'[<>"\']', '', url)
 
-def check_link_validity(link):
-    try:
-        headers = {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
-            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
-            'Accept-Language': 'en-US,en;q=0.5',
-            'Connection': 'keep-alive',
-        }
-        
-        # First try HEAD request
-        try:
-            response = requests.head(link, headers=headers, allow_redirects=True, timeout=10)
-            if response.status_code < 400:
-                return True
-        except:
-            pass  # If HEAD fails, try GET
-            
-        # If HEAD fails or returns error, try GET
-        response = requests.get(link, headers=headers, allow_redirects=True, timeout=15, stream=True)
-        return response.status_code < 400
-    except Exception as e:
-        current_app.logger.error(f"Error checking link validity for {link}: {str(e)}")
-        return False
-
 def extract_main_image(link):
     try:
         headers = {

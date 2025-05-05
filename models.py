@@ -19,7 +19,4 @@ class Property(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     link = db.Column(db.String(500), nullable=False)
     position = db.Column(db.Integer, nullable=False)
-    main_image = db.Column(db.String(500), nullable=True)
-    is_valid = db.Column(db.Boolean, default=True)
-    last_checked = db.Column(db.DateTime, default=None)
-    consecutive_fails = db.Column(db.Integer, default=0) 
+    main_image = db.Column(db.String(500), nullable=True) 

@@ -2,8 +2,8 @@ from flask import Blueprint, render_template, request, redirect, url_for, jsonif
 from flask_login import login_required
 from models import Property
 from extensions import db
-from utils import is_valid_url, sanitize_url, check_link_validity, extract_main_image
-from datetime import datetime, timedelta
+from utils import is_valid_url, sanitize_url, extract_main_image
+from datetime import datetime
 
 properties_bp = Blueprint('properties', __name__)
 
@@ -16,43 +16,6 @@ def window():
     except Exception as e:
         current_app.logger.error(f"Error in window route: {str(e)}")
         abort(500)
-
-@properties_bp.route('/check_links')
-@login_required
-def check_links():
-    try:
-        properties = Property.query.all()
-        results = {}
-        now = datetime.utcnow()
-        recheck_threshold = now - timedelta(hours=24)  # Only recheck after 24 hours
-        
-        for property in properties:
-            # Skip rechecking if the link was already marked as invalid and checked recently
-            if not property.is_valid and property.last_checked and property.last_checked > recheck_threshold:
-                if property.consecutive_fails >= 3:  # If failed 3 times in a row, don't check for a week
-                    if property.last_checked > now - timedelta(days=7):
-                        results[property.position] = False
-                        continue
-                else:
-                    results[property.position] = False
-                    continue
-            
-            is_valid = check_link_validity(property.link)
-            property.is_valid = is_valid
-            property.last_checked = now
-            
-            if not is_valid:
-                property.consecutive_fails += 1
-            else:
-                property.consecutive_fails = 0
-                
-            results[property.position] = is_valid
-            
-        db.session.commit()
-        return jsonify(results)
-    except Exception as e:
-        current_app.logger.error(f"Error checking links: {str(e)}")
-        return jsonify({'error': str(e)}), 500
 
 @properties_bp.route('/add_property', methods=['GET', 'POST'])
 @login_required
@@ -69,21 +32,19 @@ def add_property():
             if not is_valid_url(link):
                 abort(400, "Invalid URL")
             
-            # Sanitize and validate the link
+            # Sanitize the link
             link = sanitize_url(link)
             
-            # Extract main image and check link validity
+            # Extract main image
             main_image = extract_main_image(link)
-            is_valid = check_link_validity(link)
             
             # Check if position is already taken
             existing = Property.query.filter_by(position=position).first()
             if existing:
                 existing.link = link
                 existing.main_image = main_image
-                existing.is_valid = is_valid
             else:
-                new_property = Property(link=link, position=position, main_image=main_image, is_valid=is_valid)
+                new_property = Property(link=link, position=position, main_image=main_image)
                 db.session.add(new_property)
             
             db.session.commit()
